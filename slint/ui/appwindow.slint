@@ -1,0 +1,111 @@
+import { Button, VerticalBox, StandardButton , ComboBox, LineEdit, HorizontalBox, TextEdit} from "std-widgets.slint";
+
+ export component AppWindow inherits Window {
+    in property <string> result: "";
+    in property <string> error_text: "";
+    out property <string> year: "";
+    out property <string> month: "";
+    out property <string> invoice: "";
+
+    callback calc;
+    callback reset;
+    callback show_error_popup;
+
+    title: "Расчет зарплаты";
+
+    show_error_popup => { error_popup.show(); }
+
+    error_popup := PopupWindow {
+        x: (root.width - 380px) / 2;
+        y: 100px;
+        width: 380px;
+
+        Rectangle {
+            background: root.background;
+            border-color: root.background.brighter(65%);
+            border-width: 2px;
+            border-radius: 10px;
+        }
+
+        Dialog {
+            height:100%; width: 100%;
+
+            error_popup_text := Text {
+                text: error-text;
+                wrap: word-wrap;
+            }
+
+            StandardButton { kind: ok; }
+        }
+
+    }
+ 
+    HorizontalBox {
+        VerticalBox {
+            padding: 20px;
+            spacing: 10px;
+    
+            Text {
+                text: "Год";
+            }
+            ComboBox {
+                model: ["2024", "2023", "2022"];
+                current-value: "";
+                selected(s) => {
+                    root.year = s
+                }
+            }        
+            Text {
+                text: "Месяц";
+            }
+            ComboBox {
+                model: ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
+                current-value: "";
+                selected(s) => {
+                    root.month = s
+                }
+            }
+    
+            VerticalBox {
+                padding: 0px;
+                padding-top: 20px;
+                padding-bottom: 20px;
+    
+                Text {
+                    text: "Общая сумма";
+                }
+                LineEdit {
+                    edited(t) => {
+                        root.invoice = t;
+                    }
+                }
+            }
+    
+            VerticalBox {
+                padding: 0px;
+    
+                Button {
+                    text: "Рассчитать";
+                    primary: true;
+                    clicked => {
+                        root.calc();
+                    }
+                }
+            }
+    
+        }
+
+        VerticalBox {
+            TextEdit {
+                read-only: true;
+                width: 280px;
+                text: result;
+            }
+        }
+
+    }
+
+    
+    
+}
+
