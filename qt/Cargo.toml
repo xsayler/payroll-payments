@@ -1,0 +1,16 @@
+[package]
+name = "qt"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cxx = "1.0.95"
+cxx-qt = "0.6"
+cxx-qt-lib = "0.6"
+
+[build-dependencies]
+# Use `cxx-qt-build = "0.6"` here instead!
+# The link_qt_object_files feature is required for statically linking Qt 6.
+cxx-qt-build = { version = "0.6.0", features = [ "link_qt_object_files" ] }
