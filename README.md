@@ -12,7 +12,9 @@ This is a project where I'm building a simple desktop application using Rust and
 | [Qt](https://www.qt.io/product) |  |
 | [Gtk](https://www.gtk.org) |  |
 | [Flutter](https://flutter.dev) |  |
-
+| [Tauri](https://tauri.app) |  |
+| [iced](https://iced.rs) |  |
+| [fltk](https://github.com/fltk-rs/fltk-rs) |  |
 
 ## License
 
